@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+<head>
+    <meta charset="UTF-8">
+    <title>HOME | e-library</title>
+    <link rel="stylesheet" th:href="@{/css/style.css}">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
+</head>
+<body>
+
+    <header>
+        <nav>
+            <div class="logo">
+                <img src="https://www.unza.zm/themes/unza/logo.svg" alt="UNZA">
+            </div>
+            <ul>
+                <li><a th:href="@{/}">Home</a></li>
+                <li sec:authorize="isFullyAuthenticated()"><a th:href="@{/logout}">Logout</a></li>
+                <li sec:authorize="!isFullyAuthenticated()"><a th:href="@{/login}">Login</a></li>
+            </ul>
+        </nav>
+    </header>
+    <main>
+        <div class="hero">
+            <form th:action="@{/}">
+                <input name="search" id="search" type="text" placeholder="search for a book">
+                <button type="submit" class="material-symbols-outlined">search</button>
+            </form>
+        </div>
+        <div class="books">
+                <a th:each="book: ${bBook}" th:href="@{'/book/'+ ${book.accession}}" class="book">
+                    <img th:src="'data:image/jpeg;base64,'+ ${book.getCoverImage()}" alt="book">
+                    <h4 th:text="${book.bookName}" class="title">Give and Take</h4>
+                    <h5 th:text="${book.author}" class="author">ADAM GRANT</h5>
+                    <div class="dits">
+                        <p th:if="${book.edition==1}" class="edition">1<sup>st</sup> Edition</p>
+                        <p th:if="${book.edition==2}" class="edition">2<sup>nd</sup> Edition</p>
+                        <p th:if="${book.edition==3}" class="edition">3<sup>rd</sup> Edition</p>
+                        <p th:if="${book.edition==4}" class="edition">4<sup>th</sup> Edition</p>
+                        <p th:if="${book.edition==5}" class="edition">5<sup>th</sup> Edition</p>
+                        <p th:text="${book.yearPublished}" class="yearPublished">2023</p>
+                    </div>
+                    <p th:text="${book.publisher}" class="publisher">UNZA Press</p>
+                </a>
+        </div>
+        <div class="navButton" th:each="total : ${totalPages}">
+            <div th:if="${bPage>1}"  class="more_btn">
+                <a class="more" th:href="@{'/page/'+ ${bPage - 1}}">Prev</a>
+            </div>
+            <div th:each="page :${#numbers.sequence(1,totalPages)}" class="more_btn">
+                <a class="more" th:text="${page}" th:href="@{'/page/'+ ${page}}"></a>
+            </div>
+            <div th:if="${totalPages>bPage}"  class="more_btn">
+                <a class="more" th:href="@{'/page/'+ ${bPage+1}}">Next</a>
+            </div>
+        </div>
+    </main>
+</body>
+</html>
