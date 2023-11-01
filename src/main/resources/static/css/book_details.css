@@ -1,0 +1,159 @@
+@import url('https://fonts.googleapis.com/css2?family=Lato:wght@300;700&family=Montserrat:wght@300;500;600&family=Poppins:wght@300;400&family=Roboto:wght@300;400;500&display=swap');
+:root{
+    --primary-color:#f2f2f2;
+    --secondary-color: #008000FF;
+    --tertially-color: #010101;
+    --sup: #FFCC00FF;
+}
+
+*,
+::before,
+::after{
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+}
+
+body{
+    font-family: 'Montserrat',sans-serif;
+    background-color: var(--primary-color);
+}
+ul{
+    list-style: none;
+}
+
+a{
+    text-decoration: none;
+    color: var(--tertially-color);
+}
+
+nav{
+    background-color: var(--secondary-color);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 20px;
+}
+
+.logo{
+    height: 50px;
+}
+
+.logo img{
+    height: 100%;
+}
+nav ul{
+    display: flex;
+    justify-content:center;
+    align-items: center;
+    gap: 20px;
+    transition: .5s linear;
+}
+nav ul li a{
+    color: var(--primary-color);
+    font-family: 'Poppins',sans-serif;
+    padding: 2px 0;
+}
+
+nav ul li a:hover{
+    filter: brightness(90%);
+}
+
+main{
+    margin: 20px;
+}
+.container{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    position: relative;
+}
+.book{
+    width: 90%;
+    display: flex;
+    gap: 20px;
+    position: relative;
+}
+.details{
+    padding: 5px 0;
+}
+.book_details{
+    display: flex;
+    justify-content: left;
+    align-items: center;
+    gap: 20px;
+    padding: 10px 0;
+}
+.reserve{
+    background-color: var(--secondary-color);
+    color: var(--primary-color);
+    padding: 10px 15px;
+    border: none;
+    position: absolute;
+    cursor: pointer;
+}
+.confirm_reserve{
+    background-color: var(--primary-color);
+    box-shadow: 0 0 10px var(--secondary-color);
+    border-radius: 10px;
+    position: absolute;
+    width: 300px;
+    padding: 10px;
+    display: none;
+}
+.confirm_reserve p{
+    padding: 10px 0;
+}
+.reserveBtns{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 40px;
+}
+
+.no,
+.yes{
+    padding: 5px 18px;
+    border-radius: 5px;
+    color: var(--primary-color);
+    cursor: pointer;
+    border: none;
+}
+.yes{
+    background-color: var(--secondary-color);
+}
+.no{
+    background-color: red;
+}
+.cancel{
+    color: red;
+    text-align: right;
+    cursor: pointer;
+}
+.create_reservation{
+    background-color: var(--primary-color);
+    width: 300px;
+    position: absolute;
+    box-shadow: 0 0 10px var(--secondary-color);
+    border-radius: 10px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    visibility: hidden;
+}
+.create_reservation p{
+    margin: 10px 20px;
+    color: var(--secondary-color);
+}
+.create_reservation button{
+    background-color: var(--secondary-color);
+    text-transform: uppercase;
+    padding: 8px 15px;
+    border: none;
+    cursor: pointer;
+    color: var(--primary-color);
+    width: 50px;
+    margin: 20px;
+}

@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security"
+>
+<head>
+    <meta charset="UTF-8">
+    <title>BOOKS | e-library</title>
+    <link rel="stylesheet" th:href="@{/css/book.css}">
+</head>
+<body>
+<header>
+    <nav>
+        <div class="logo">
+            <img src="https://www.unza.zm/themes/unza/logo.svg" alt="UNZA">
+        </div>
+        <ul>
+            <li><a th:href="@{/}">Home</a></li>
+            <li><a th:href="@{/admin/add-book}">Add Book</a></li>
+            <li><a href="">Profile</a></li>
+            <li><a th:href="@{/admin/issues}">Issues</a></li>
+            <li><a th:href="@{/admin/issued}">Issued</a></li>
+            <li><a th:href="@{/admin/books}">Books</a></li>
+            <li sec:authorize="isFullyAuthenticated()"><a th:href="@{/logout}">Logout</a></li>
+            <li sec:authorize="!isFullyAuthenticated()"><a th:href="@{/login}">Login</a></li>
+        </ul>
+    </nav>
+</header>
+<main>
+    <div class="container">
+        <h2>Books</h2>
+        <table>
+            <tr>
+                <th>#</th>
+                <th>ISBN</th>
+                <th>Accession Number</th>
+                <th>Book Name</th>
+                <th>Author</th>
+                <th>Quantity</th>
+                <th>Edition</th>
+                <th>Copy Number</th>
+                <th>Publisher</th>
+                <th>Year Published</th>
+                <th>Action</th>
+                <th>Action</th>
+            </tr>
+            <tr th:each="book,index:${books}">
+                <td th:text="${index.index+1}"></td>
+                <td th:text="${book.isbn}">ISBN</td>
+                <td th:text="${book.accession}">Accession Number</td>
+                <td th:text="${book.bookName}">Book Name</td>
+                <td th:text="${book.author}">Author</td>
+                <td th:text="${book.quantity}">Quantity</td>
+                <td th:if="${book.edition ==1}">1<sup>st</sup> Edition</td>
+                <td th:if="${book.edition ==2}">2<sup>nd</sup> Edition</td>
+                <td th:if="${book.edition ==3}">3<sup>rd</sup> Edition</td>
+                <td th:if="${book.edition ==4}">4<sup>th</sup> Edition</td>
+                <td th:if="${book.edition ==5}">5<sup>th</sup> Edition</td>
+                <td th:text="${'C-'+book.copyNumber}">Copy Number</td>
+                <td th:text="${#strings.toUpperCase(book.publisher)}">Publisher</td>
+                <td th:text="${book.yearPublished}">Year Published</td>
+                <td><a class="approve" href="">Update</a></td>
+                <td><a class="decline" th:href="@{'/admin/delete/' + ${book.getAccession()}}">Delete</a></td>
+            </tr>
+        </table>
+    </div>
+</main>
+</body>
+</html>

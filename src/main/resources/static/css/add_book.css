@@ -1,0 +1,114 @@
+@import url('https://fonts.googleapis.com/css2?family=Lato:wght@300;700&family=Montserrat:wght@300;500;600&family=Poppins:wght@300;400&family=Roboto:wght@300;400;500&display=swap');
+:root{
+    --primary-color:#f2f2f2;
+    --secondary-color: #008000FF;
+    --tertially-color: #010101;
+    --sup: #FFCC00FF;
+    --padding:20px;
+}
+
+*,
+::before,
+::after{
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+}
+
+body{
+    font-family: 'Montserrat',sans-serif;
+    background-color: var(--primary-color);
+}
+ul{
+    list-style: none;
+}
+
+a{
+    text-decoration: none;
+    color: var(--tertially-color);
+}
+
+nav{
+    background-color: var(--secondary-color);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: var(--padding);
+}
+
+.logo{
+    height: 50px;
+}
+
+.logo img{
+    height: 100%;
+}
+nav ul{
+    display: flex;
+    justify-content:center;
+    align-items: center;
+    gap: var(--padding);
+    transition: .5s linear;
+}
+nav ul li a{
+    color: var(--primary-color);
+    font-family: 'Poppins',sans-serif;
+    padding: 2px 0;
+}
+
+nav ul li a:hover{
+    filter: brightness(90%);
+}
+
+.form{
+    padding: var(--padding);
+}
+.form h2{
+    text-align: center;
+}
+.form input,
+.form select,
+.form textarea{
+    outline: none;
+    font-size: 18px;
+    text-indent: 5px;
+    padding: 5px 0;
+    border: 1px solid var(--tertially-color);
+    width: 300px;
+}
+.form textarea{
+    height: 35px;
+}
+.form p{
+    color: red;
+    font-size: 10px;
+}
+.form input[type="file"]{
+    border: none;
+}
+.form input[type="submit"]{
+    margin-top: 30px;
+    border: none;
+    background-color: var(--secondary-color);
+    color: var(--primary-color);
+    cursor: pointer;
+}
+
+.form div{
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    margin: 8px 0 0 0;
+}
+
+.form form{
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--padding);
+}
+
+.note{
+    color: red;
+    margin: 0 0 var(--padding) var(--padding);
+}
+

@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security"
+>
+<head>
+    <meta charset="UTF-8">
+    <title>ADMIN | e-library</title>
+    <link rel="stylesheet" th:href="@{/css/admin.css}">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
+</head>
+<body>
+<header>
+    <nav>
+        <div class="logo">
+            <img src="https://www.unza.zm/themes/unza/logo.svg" alt="UNZA">
+        </div>
+        <ul>
+            <li><a th:href="@{/}">Home</a></li>
+            <li><a th:href="@{/admin/add-book}">Add Book</a></li>
+            <li><a href="">Profile</a></li>
+            <li><a th:href="@{/admin/issues}">Issues</a></li>
+            <li><a th:href="@{/admin/issued}">Issued</a></li>
+            <li><a th:href="@{/admin/books}">Books</a></li>
+            <li sec:authorize="isFullyAuthenticated()"><a th:href="@{/logout}">Logout</a></li>
+            <li sec:authorize="!isFullyAuthenticated()"><a th:href="@{/login}">Login</a></li>
+        </ul>
+    </nav>
+</header>
+<main>
+    <div class="container">
+        <h2>Pending Approvals</h2>
+        <table>
+            <tr>
+                <th>Computer #</th>
+                <th>Book Name</th>
+                <th>Accession Number</th>
+                <th>Action</th>
+                <th>Action</th>
+            </tr>
+            <tr th:each="reservation: ${pending}">
+                <td th:text="${reservation.user.compNumber}">2020778726</td>
+                <td th:text="${reservation.book.bookName}"></td>
+                <td th:text="${reservation.book.accessionNumber}">0098765356</td>
+                <td><a class="approve" th:href="@{'/admin/approveReservation/'+${reservation.book.accessionNumber}}">Approve</a></td>
+                <td><a class="decline" href="">Decline</a></td>
+            </tr>
+            <tr th:if="${pending.size() ==0}">
+                <td>No pending approvals</td>
+            </tr>
+        </table>
+
+        <div class="confirm">
+            <p class="material-symbols-outlined close">close</p>
+            <h5>Are you sure you want to approve <span class="confirm_text"></span> </h5>
+            <div class="reserveBtns">
+                <button class="yes">
+                    <span class="material-symbols-outlined">done</span>
+                </button>
+                <button class="no">
+                    <span class="material-symbols-outlined">close</span>
+                </button>
+            </div>
+        </div>
+    </div>
+</main>
+
+<!--<script src="/js/admin.js"></script>-->
+</body>
+</html>

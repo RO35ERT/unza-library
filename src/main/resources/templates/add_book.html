@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security"
+>
+<head>
+    <meta charset="UTF-8">
+    <title>Add Book</title>
+    <link rel="stylesheet" th:href="@{/css/add_book.css}">
+</head>
+<body>
+<header>
+  <nav>
+    <div class="logo">
+      <img src="https://www.unza.zm/themes/unza/logo.svg" alt="UNZA">
+    </div>
+    <ul>
+      <li><a th:href="@{/}">Home</a></li>
+      <li><a th:href="@{/admin/add-book}">Add Book</a></li>
+      <li><a href="">Profile</a></li>
+      <li><a th:href="@{/admin/issues}">Issues</a></li>
+      <li><a href="">Issued</a></li>
+      <li><a th:href="@{/admin/books}">Books</a></li>
+      <li sec:authorize="isFullyAuthenticated()"><a th:href="@{/logout}">Logout</a></li>
+      <li sec:authorize="!isFullyAuthenticated()"><a th:href="@{/login}">Login</a></li>
+    </ul>
+  </nav>
+</header>
+
+  <main>
+    <div class="form">
+      <h2>Add New Book</h2>
+<!--      <p style="color: green;text-align: center; font-size: 20px" th:if="${param} != null">Book Created Successfully</p>-->
+      <form th:action="@{/admin/add-book}" method="post" enctype="multipart/form-data" th:object="${addBook}">
+        <div class="">
+          <label for="isbn">ISBN Number</label>
+          <input th:field="*{isbn}" type="text" name="isbn" id="isbn">
+          <p th:if="${#fields.hasErrors('isbn')}" th:errors="*{isbn}"></p>
+        </div>
+        <div class="">
+          <label for="aNumber">Accession Number</label>
+          <input th:field="*{accession}" type="text" name="aNumber" id="aNumber">
+          <p th:if="${#fields.hasErrors('accession')}" th:errors="*{accession}"></p>
+        </div>
+        <div class="">
+          <label for="bName">Book Name</label>
+          <input th:field="*{bookName}" type="text" name="bName" id="bName">
+          <p th:if="${#fields.hasErrors('bookName')}" th:errors="*{bookName}"></p>
+        </div>
+        <div class="">
+          <label for="bAuthor">Author</label>
+          <input th:field="*{author}" type="text" name="bAuthor" id="bAuthor">
+          <p th:if="${#fields.hasErrors('author')}" th:errors="*{author}"></p>
+        </div>
+        <div class="">
+          <label for="quantity">Quantity</label>
+          <input th:field="*{quantity}" type="number" name="quantity" id="quantity">
+          <p th:if="${#fields.hasErrors('quantity')}" th:errors="*{quantity}"></p>
+        </div>
+        <div class="">
+          <label for="bPicture">Cover Image</label>
+          <input th:field="*{coverImage}" type="file" name="bPicture" id="bPicture">
+        </div>
+        <div class="">
+          <label for="edition">Edition</label>
+          <select th:field="*{edition}" name="edition" id="edition">
+            <option value="1">1 st Edition</option>
+            <option value="2">2 nd Edition</option>
+            <option value="3">3 rd Edition</option>
+            <option value="4">4 th Edition</option>
+            <option value="5">5 th Edition</option>
+          </select>
+        </div>
+        <div class="">
+          <label for="cNumber">Copy Number</label>
+          <input th:field="*{copyNumber}" type="number" name="cNumber" id="cNumber">
+          <p th:if="${#fields.hasErrors('copyNumber')}" th:errors="*{copyNumber}"></p>
+        </div>
+        <div class="">
+          <label for="desc">Book Description</label>
+          <textarea th:field="*{description}" name="desc" id="desc"></textarea>
+          <p th:if="${#fields.hasErrors('description')}" th:errors="*{description}"></p>
+        </div>
+        <div class="">
+          <label for="publisher">Publisher</label>
+          <input th:field="*{publisher}" type="text" name="publisher" id="publisher">
+          <p th:if="${#fields.hasErrors('publisher')}" th:errors="*{publisher}"></p>
+        </div>
+        <div class="">
+          <label for="year">Year Published</label>
+          <input th:field="*{yearPublished}" type="text" name="year" id="year">
+          <p th:if="${#fields.hasErrors('yearPublished')}" th:errors="*{yearPublished}"></p>
+        </div>
+        <div class="">
+          <input type="submit" value="create" id="create" class="create">
+        </div>
+      </form>
+
+    </div>
+    <div class="note">
+      <p>Note, for books with multiple author, Write all of them seperated by a comma.</p>
+    </div>
+  </main>
+</body>
+</html>

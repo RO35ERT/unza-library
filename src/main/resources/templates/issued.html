@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security"
+>
+<head>
+    <meta charset="UTF-8">
+    <title>ADMIN | e-library</title>
+    <link rel="stylesheet" th:href="@{/css/issued.css}">
+</head>
+<body>
+<header>
+    <nav>
+        <div class="logo">
+            <img src="https://www.unza.zm/themes/unza/logo.svg" alt="UNZA">
+        </div>
+        <ul>
+            <li><a th:href="@{/}">Home</a></li>
+            <li><a th:href="@{/admin/add-book}">Add Book</a></li>
+            <li><a href="">Profile</a></li>
+            <li><a th:href="@{/admin/issues}">Issues</a></li>
+            <li><a th:href="@{/admin/issued}">Issued</a></li>
+            <li><a th:href="@{/admin/books}">Books</a></li>
+            <li sec:authorize="isFullyAuthenticated()"><a th:href="@{/logout}">Logout</a></li>
+            <li sec:authorize="!isFullyAuthenticated()"><a th:href="@{/login}">Login</a></li>
+        </ul>
+    </nav>
+</header>
+<main>
+    <div class="container">
+        <h2>Issued Books</h2>
+        <table>
+            <tr>
+                <th>Computer #</th>
+                <th>Accession Number</th>
+                <th>Book Name</th>
+                <th>Date Issued</th>
+            </tr>
+            <tr th:each="issue: ${issues}">
+                <td th:text="${issue.user.compNumber}">2020778726</td>
+                <td th:text="${issue.book.accessionNumber}">0098765356</td>
+                <th th:text="${issue.book.bookName}"></th>
+                <th th:text="${#dates.format(issue.collection,'yyy-MM-dd')}"></th>
+            </tr>
+        </table>
+    </div>
+</main>
+</body>
+</html>
